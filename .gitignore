@@ -1,6 +1,7 @@
 /.idea
 /app/cache
 /app/database
+/extensions
 /vendor
 /files
 composer.phar
