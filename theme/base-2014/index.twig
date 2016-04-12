@@ -2,10 +2,10 @@
 
 <!-- Main Page Content and Sidebar -->
 
-    <!-- Main Blog Content -->
-    <div class="large-8 columns">
+<!-- Main Blog Content -->
+<div class="large-12 columns">
 
-        <!--<article>
+    <!--<article>
             {% if record is defined %}
 
                 {# make the 'home' variable refer to the current record, which is set by the
@@ -47,48 +47,48 @@
             {% endif %}
         </article>-->
 
+    {#<hr>#}
+
+    <h4>{{ __('Latest entries') }}</h4>
+
+    {# Here we use 'setcontent' to set the variable 'records' to "entries/latest/6",
+       which is shorthand for "the 6 latest records in Entries. Note that we are
+       requesting multiple entries, so 'records' will be an array containing each
+       of the entries. That's why we use the 'for' loop to iterate over them all. #}
+    {% setcontent records = "entries/latest/6" allowpaging %}
+    {% for record in records %}
+        <article style="display: block; min-height: 200px;">
+
+            {% if record.image!="" %}
+                <div class="large-4 imageholder">
+                    <a href="{{ image(record.image) }}">
+                        <img src="{{ thumbnail(record.image, 400, 260) }}">
+                    </a>
+                </div>
+            {% endif %}
+
+            <h3><a href="{{ record.link }}">{{ record.title }}</a></h3>
+
+            <p>{{ record.excerpt(220) }}</p>
+
+        </article>
+
         {#<hr>#}
 
-        <h4>{{ __('Latest entries') }}</h4>
+    {% endfor %}
 
-        {# Here we use 'setcontent' to set the variable 'records' to "entries/latest/6",
-           which is shorthand for "the 6 latest records in Entries. Note that we are
-           requesting multiple entries, so 'records' will be an array containing each
-           of the entries. That's why we use the 'for' loop to iterate over them all. #}
-        {% setcontent records = "entries/latest/6" allowpaging %}
-        {% for record in records %}
-            <article>
-
-                {% if record.image!="" %}
-                    <div class="large-4 imageholder">
-                        <a href="{{ image(record.image) }}">
-                            <img src="{{ thumbnail(record.image, 400, 260) }}">
-                        </a>
-                    </div>
-                {% endif %}
-
-                <h3><a href="{{ record.link }}">{{ record.title }}</a></h3>
-
-                <p>{{ record.excerpt(220) }}</p>
-
-            </article>
-
-            {#<hr>#}
-
-        {% endfor %}
-
-        {{ pager() }}
+    {{ pager() }}
 
 
-    </div>
+</div>
 
-    <!-- End Main Content -->
-    {# include the sidebar. The include tag can be used to break up your templates in logical parts,
-       and re-use them across different templates/pages. #}
-    {% include '_aside.twig' %}
+<!-- End Main Content -->
+
+{# include the sidebar. The include tag can be used to break up your templates in logical parts,
+   and re-use them across different templates/pages. #}
+    {#{% include '_aside.twig' %} #}
 
 <!-- End Main Content and Sidebar -->
-
 
 
 {% include '_footer.twig' %}
